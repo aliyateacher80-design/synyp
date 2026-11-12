@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Информатика — Нейро-көңіл-күй</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#eceffa;--bg2:#dfe5fb;--card:#ffffffcc;--sol:#fff;--tx:#141a2e;--mu:#667089;--bd:#d9dff0;--ok:#22c55e;--ok2:#16a34a;--st:#4f7cff;--lo:#f5a524;--hp:#ff5d6c;--vi:#7a5cff;--glow:rgba(34,197,94,.45);--sh:0 10px 40px rgba(60,80,160,.12);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1020;--bg2:#141a38;--card:#161d36cc;--sol:#1a2240;--tx:#eaf0ff;--mu:#93a0c4;--bd:#273058;--sh:0 10px 40px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1020;--bg2:#141a38;--card:#161d36cc;--sol:#1a2240;--tx:#eaf0ff;--mu:#93a0c4;--bd:#273058;--sh:0 10px 40px rgba(0,0,0,.4);color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;color:var(--tx);font:15px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(900px 500px at 85% -10%,rgba(122,92,255,.28),transparent 60%),radial-gradient(700px 500px at -10% 20%,rgba(34,197,94,.18),transparent 60%),linear-gradient(var(--bg),var(--bg2));background-attachment:fixed}
+.wrap{max-width:940px;margin:0 auto;padding:18px 16px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.02em}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--vi),var(--ok));display:grid;place-items:center;font-size:20px;box-shadow:0 6px 18px var(--glow)}
+.tabs{display:flex;background:var(--sol);border:1px solid var(--bd);border-radius:999px;padding:4px}
+.tabs button{border:0;background:none;color:var(--mu);font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.2s}
+.tabs button.on{background:linear-gradient(135deg,var(--vi),var(--st));color:#fff;box-shadow:0 4px 14px rgba(122,92,255,.4)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--vi);outline-offset:2px}
+.card{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:24px;padding:22px;box-shadow:var(--sh);margin-bottom:16px}
+.stu{display:grid;grid-template-columns:240px 1fr;gap:26px;align-items:center}
+@media(max-width:700px){.stu{grid-template-columns:1fr}}
+/* батарея */
+.hero{display:flex;flex-direction:column;align-items:center;gap:14px}
+.batt{display:flex;flex-direction:column;align-items:center}
+.cap{width:44px;height:12px;background:var(--bd);border-radius:6px 6px 0 0}
+.bd{position:relative;width:132px;height:210px;border:5px solid var(--bd);border-radius:26px;overflow:hidden;background:var(--sol);transition:border-color .5s,box-shadow .5s}
+.bd.on{border-color:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 25%,transparent),0 0 38px color-mix(in srgb,var(--c) 55%,transparent)}
+.fill{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,color-mix(in srgb,var(--c,var(--ok)) 80%,#fff),var(--c,var(--ok)));transition:height .9s cubic-bezier(.2,1.2,.3,1)}
+.bd::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 calc(20% - 3px),var(--sol) calc(20% - 3px) 20%);pointer-events:none}
+.pct{position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-size:36px;font-weight:800;letter-spacing:-.03em;text-shadow:0 2px 10px rgba(0,0,0,.35);color:#fff}
+.bd:not(.on) .pct{color:var(--mu);text-shadow:none;font-size:42px}
+.say{text-align:center;font-weight:600;min-height:44px;max-width:230px;font-size:14px}
+/* форма */
+.lbl{font-size:13px;font-weight:600;color:var(--mu);margin:0 0 8px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+input,select{flex:1;min-width:150px;padding:13px 14px;border:1.5px solid var(--bd);border-radius:14px;background:var(--sol);color:var(--tx);font:inherit;font-weight:600}
+input::placeholder{color:var(--mu);font-weight:400}
+select{flex:0 0 130px;min-width:110px}
+.strip{display:flex;gap:8px;overflow-x:auto;padding:6px 4px 12px;margin:0 -4px;scrollbar-width:thin}
+.mood{position:relative;flex:1 0 auto;white-space:nowrap;padding:11px 15px;border:1.5px solid var(--bd);background:var(--sol);color:var(--tx);border-radius:999px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:transform .15s,box-shadow .25s,background .25s,border-color .25s}
+.mood:hover{transform:translateY(-2px);border-color:var(--ok)}
+.mood:active{transform:scale(.95)}
+.mood.sel{background:linear-gradient(135deg,#1fbf5b,#34d97d);border-color:#7dffaf;color:#04210f;box-shadow:0 0 0 3px rgba(52,217,125,.35),0 0 24px rgba(52,217,125,.75)}
+.msg{min-height:22px;margin:2px 0 0;font-size:13.5px;color:var(--mu);font-weight:600}
+.msg.err{color:var(--hp)}.msg.ok{color:var(--ok2)}
+.pt{position:fixed;z-index:50;pointer-events:none;font-size:22px;animation:pop 1s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+/* мұғалім */
+.top{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.donut{position:relative;width:190px;height:190px;flex:none}
+.donut svg{transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:15;transition:stroke-dasharray .8s ease,stroke-dashoffset .8s ease}
+.dc{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.dc b{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.dc span{font-size:12px;color:var(--mu);font-weight:600}
+.side{flex:1;min-width:220px}
+.ttl{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.ttl h2{margin:0;font-size:18px;letter-spacing:-.01em}
+.ttl select{flex:0 0 auto;min-width:0;padding:8px 12px}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{padding:10px 12px;border-radius:14px;background:var(--sol);border:1px solid var(--bd)}
+.chip b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.chip span{font-size:12.5px;color:var(--mu);font-weight:600}
+.chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.alert{display:none;margin-top:12px;padding:10px 14px;border-radius:14px;background:color-mix(in srgb,var(--hp) 15%,transparent);border:1px solid var(--hp);font-weight:700;font-size:14px}
+.alert.on{display:block;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--hp) 25%,transparent)}}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--mu);font-weight:600;font-size:12.5px;padding:6px 10px}
+td{padding:10px;border-top:1px solid var(--bd);white-space:nowrap}
+.who{display:flex;align-items:center;gap:10px;font-weight:700}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;background:var(--vi)}
+.tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:700;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--tx);border:1px solid color-mix(in srgb,var(--c) 60%,transparent)}
+.ghost{background:none;border:1.5px dashed var(--bd);color:var(--mu);border-radius:12px;padding:8px 14px;cursor:pointer;font:inherit;font-weight:600;font-size:13px;margin:12px 8px 0 0}
+.ghost:hover{border-color:var(--vi);color:var(--tx)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <div class="brand"><div class="logo">💻</div>Информатика</div>
+  <div class="tabs"><button id="t1" class="on">Оқушы</button><button id="t2">Мұғалім кабинеті</button></div>
+ </header>
+
+ <section id="v1">
+  <div class="card stu">
+   <div class="hero">
+    <div class="batt"><div class="cap"></div><div class="bd" id="bd"><div class="fill" id="fill"></div><div class="pct" id="pct">?</div></div></div>
+    <div class="say" id="say">Қазір өзіңді қалай сезінесің?</div>
+   </div>
+   <div>
+    <p class="lbl">Оқушы</p>
+    <div class="row"><input id="nm" placeholder="Аты-жөніңіз" autocomplete="off"><select id="cl"></select></div>
+    <p class="lbl">Нейро-көңіл-күй / Энергия деңгейі</p>
+    <div class="strip" id="strip"></div>
+    <p class="msg" id="msg"></p>
+   </div>
+  </div>
+ </section>
+
+ <section id="v2" hidden>
+  <div class="card">
+   <div class="ttl"><h2>Сыныптың дайындығы</h2><select id="fc"></select></div>
+   <div class="top">
+    <div class="donut"><svg viewBox="0 0 140 140" width="190" height="190"><circle cx="70" cy="70" r="52" style="stroke:var(--bd)"/><g id="arcs"></g></svg><div class="dc"><b id="big">0%</b><span>дайын</span></div></div>
+    <div class="side"><div class="chips" id="chips"></div><div class="alert" id="al"></div></div>
+   </div>
+   <p class="lbl" id="tot" style="margin:14px 0 0"></p>
+  </div>
+  <div class="card">
+   <div class="ttl"><h2>Бағалау журналы</h2></div>
+   <div class="tw"><table><thead><tr><th>Оқушы</th><th>Сынып</th><th>Көңіл-күй</th><th>Уақыты</th></tr></thead><tbody id="tb"></tbody></table></div>
+   <button class="ghost" id="seed">Демо деректер қосу</button><button class="ghost" id="clr">Тазалау</button>
+  </div>
+ </section>
+</div>
+
+<script>
+const MOODS=[
+ {id:'full',ic:'🔋',tx:'100% (Дайынмын)',g:'ready',p:100,c:'#22c55e',say:'Толық зарядталдың! Сабаққа кеттік.'},
+ {id:'stable',ic:'⚡',tx:'75% (Тұрақты)',g:'stable',p:75,c:'#4f7cff',say:'Тұрақты режим: жұмысқа дайынсың.'},
+ {id:'low',ic:'🔌',tx:'40% (Қуаттау қажет)',g:'low',p:40,c:'#f5a524',say:'Қуат аз. Су іш, бір минут демал.'},
+ {id:'help',ic:'🧠',tx:'Көмек керек',g:'help',p:20,c:'#ff5d6c',say:'Мұғалімге хабар жетті, жақында көмектеседі.'},
+ {id:'insp',ic:'🚀',tx:'Шабыт бар',g:'ready',p:100,c:'#7a5cff',say:'Шабытыңды кодқа айналдыр!'}];
+const GROUPS=[{g:'ready',tx:'дайын',c:'#22c55e'},{g:'stable',tx:'тұрақты',c:'#4f7cff'},{g:'low',tx:'қуаттау қажет',c:'#f5a524'},{g:'help',tx:'көмек қажет',c:'#ff5d6c'}];
+const CLASSES=['5A','5B','6A','6B','7A','7B','8A','8B','9A','9B','10A','11A'];
+const KEY='mm_records_v1';let mem=[];
+const $=id=>document.getElementById(id);
+const today=()=>new Date().toISOString().slice(0,10);
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* Дерекқор қабаты: нақты платформада осы екі функцияны API-ге ауыстырыңыз */
+function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):mem}catch(e){return mem}}
+function save(a){mem=a;try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}
+
+function beep(){try{const C=new (window.AudioContext||window.webkitAudioContext)(),o=C.createOscillator(),g=C.createGain(),t=C.currentTime;o.type='sine';o.frequency.setValueAtTime(660,t);o.frequency.exponentialRampToValueAtTime(990,t+.12);g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.15,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.connect(g);g.connect(C.destination);o.start();o.stop(t+.26)}catch(e){}}
+
+function burst(el,ic){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const r=el.getBoundingClientRect(),x0=r.left+r.width/2,y0=r.top+r.height/2;
+  for(let i=0;i<12;i++){const s=document.createElement('span'),a=Math.random()*Math.PI*2,d=50+Math.random()*80;
+   s.className='pt';s.textContent=ic;s.style.left=x0+'px';s.style.top=y0+'px';
+   s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d-40+'px');s.style.setProperty('--r',(Math.random()*240-120)+'deg');
+   document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}
+}
+
+function fillSel(el,all){el.innerHTML=(all?'<option value="">Барлық сыныптар</option>':'')+CLASSES.map(c=>`<option>${c}</option>`).join('')}
+fillSel($('cl'),false);fillSel($('fc'),true);
+
+function currentMood(){const n=$('nm').value.trim().toLowerCase(),c=$('cl').value;
+ const r=n&&load().find(x=>x.name.toLowerCase()===n&&x.cls===c&&x.date===today());return r?r.mood:null}
+function showBatt(m){
+  const bd=$('bd');
+  if(!m){bd.classList.remove('on');$('fill').style.height='0';$('pct').textContent='?';$('say').textContent='Қазір өзіңді қалай сезінесің?';return}
+  bd.style.setProperty('--c',m.c);$('fill').style.setProperty('--c',m.c);bd.classList.add('on');
+  $('fill').style.height=m.p+'%';$('pct').textContent=m.id==='help'?'🧠':m.id==='insp'?'🚀':m.p+'%';$('say').textContent=m.say;
+}
+function drawStrip(){
+  const s=currentMood();
+  $('strip').innerHTML=MOODS.map(m=>`<button class="mood${m.id===s?' sel':''}" data-id="${m.id}">${m.ic} ${m.tx}</button>`).join('');
+  showBatt(MOODS.find(m=>m.id===s));
+}
+$('strip').addEventListener('click',e=>{
+  const b=e.target.closest('.mood');if(!b)return;
+  const name=$('nm').value.trim(),m=MOODS.find(x=>x.id===b.dataset.id);
+  if(!name){$('msg').className='msg err';$('msg').textContent='Алдымен аты-жөніңізді жазыңыз.';$('nm').focus();return}
+  beep();
+  const cls=$('cl').value,a=load().filter(x=>!(x.name.toLowerCase()===name.toLowerCase()&&x.cls===cls&&x.date===today()));
+  a.push({name,cls,mood:m.id,date:today(),ts:Date.now()});save(a);
+  drawStrip();burst(document.querySelector('.mood.sel')||b,m.ic);
+  $('msg').className='msg ok';$('msg').textContent='✅ Тіркелді: '+m.ic+' '+m.tx;
+});
+$('nm').addEventListener('input',()=>{$('msg').textContent='';drawStrip()});$('cl').addEventListener('change',drawStrip);
+
+let shown=0;
+function countTo(v){const s=shown,t0=performance.now();shown=v;
+ (function f(t){const k=Math.min(1,(t-t0)/700);$('big').textContent=Math.round(s+(v-s)*k)+'%';if(k<1)requestAnimationFrame(f)})(t0)}
+function drawTeacher(){
+  const f=$('fc').value,rows=load().filter(r=>r.date===today()&&(!f||r.cls===f)).sort((a,b)=>b.ts-a.ts);
+  const n=rows.length,cnt={};GROUPS.forEach(x=>cnt[x.g]=0);
+  rows.forEach(r=>cnt[MOODS.find(m=>m.id===r.mood).g]++);
+  const pc=g=>n?Math.round(cnt[g]/n*100):0,C=2*Math.PI*52;let off=0;
+  $('arcs').innerHTML=GROUPS.map(x=>{const L=n?cnt[x.g]/n*C:0,h=`<circle cx="70" cy="70" r="52" stroke="${x.c}" stroke-dasharray="${Math.max(0,L-(n&&L<C?2:0))} ${C}" stroke-dashoffset="${-off}"/>`;off+=L;return h}).join('');
+  countTo(pc('ready'));
+  $('chips').innerHTML=GROUPS.map(x=>`<div class="chip"><b>${pc(x.g)}%</b><span><i style="background:${x.c}"></i>${x.tx}</span></div>`).join('');
+  $('al').className='alert'+(cnt.help?' on':'');$('al').textContent=`🧠 Көмек керек: ${cnt.help} оқушы`;
+  $('tot').textContent=n?`Бүгін белгілеген оқушылар: ${n} · ${f||'барлық сыныптар'}`:'Бүгін әлі ешкім көңіл-күйін белгілеген жоқ. Оқушылар белгілегенде мұнда көрінеді.';
+  $('tb').innerHTML=rows.map(r=>{const m=MOODS.find(x=>x.id===r.mood),ini=r.name.split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+   return `<tr><td><div class="who"><div class="av" style="background:${m.c}">${esc(ini)}</div>${esc(r.name)}</div></td><td>${r.cls}</td><td><span class="tag" style="--c:${m.c}">${m.ic} ${m.tx}</span></td><td>${new Date(r.ts).toLocaleTimeString('kk-KZ',{hour:'2-digit',minute:'2-digit'})}</td></tr>`}).join('')||'<tr><td colspan="4" style="color:var(--mu)">Дерек жоқ</td></tr>';
+}
+$('fc').addEventListener('change',drawTeacher);
+$('seed').onclick=()=>{
+ const N=['Айдана Серік','Нұрлан Әлім','Дана Ахмет','Ерасыл Қайрат','Томирис Ғани','Арман Бек','Мадина Сәрсен','Алихан Тұр','Аружан Оразова','Санжар Мұрат','Айнұр Қасым','Бекзат Нұр'];
+ const o=['full','full','insp','full','stable','full','full','insp','full','stable','low','help'];
+ const a=load().filter(r=>!r._d);N.forEach((n,i)=>a.push({name:n,cls:'8A',mood:o[i],date:today(),ts:Date.now()-i*60000,_d:1}));
+ save(a);drawTeacher()};
+$('clr').onclick=()=>{save([]);drawTeacher();drawStrip()};
+function tab(i){$('v1').hidden=i!==1;$('v2').hidden=i!==2;$('t1').classList.toggle('on',i===1);$('t2').classList.toggle('on',i===2);i===2?drawTeacher():drawStrip()}
+$('t1').onclick=()=>tab(1);$('t2').onclick=()=>tab(2);
+drawStrip();
+</script>
+</body>
+</html>
